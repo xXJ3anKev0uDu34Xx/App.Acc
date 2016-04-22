@@ -1,1 +1,2 @@
 C:\projc\AppC\AppC\AppC\AppC\bin\Debug\AppC.exe.config
+C:\Users\mboyoiv\Desktop\AtelierBouchard\AppC\AppC\bin\Debug\AppC.exe.config
