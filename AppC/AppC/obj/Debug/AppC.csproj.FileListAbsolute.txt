@@ -1,2 +1,10 @@
 C:\projc\AppC\AppC\AppC\AppC\bin\Debug\AppC.exe.config
 C:\projc\AppC\AppC\AppC\bin\Debug\AppC.exe.config
+C:\projc\AppC\AppC\AppC\bin\Debug\AppC.exe
+C:\projc\AppC\AppC\AppC\bin\Debug\AppC.pdb
+C:\projc\AppC\AppC\AppC\obj\Debug\AppC.csprojResolveAssemblyReference.cache
+C:\projc\AppC\AppC\AppC\obj\Debug\AppC.Form1.resources
+C:\projc\AppC\AppC\AppC\obj\Debug\AppC.Properties.Resources.resources
+C:\projc\AppC\AppC\AppC\obj\Debug\AppC.csproj.GenerateResource.Cache
+C:\projc\AppC\AppC\AppC\obj\Debug\AppC.exe
+C:\projc\AppC\AppC\AppC\obj\Debug\AppC.pdb
