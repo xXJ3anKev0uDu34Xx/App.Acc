@@ -78,11 +78,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Droite.png" />
-    <Content Include="edit.png" />
-    <Content Include="Gauche.png" />
-    <Content Include="plus.png" />
-    <Content Include="supprimer.png" />
+    <Content Include="Picture\Droite.png" />
+    <Content Include="Picture\edit.png" />
+    <Content Include="Picture\Gauche.png" />
+    <Content Include="Picture\plus.png" />
+    <Content Include="Picture\supprimer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
