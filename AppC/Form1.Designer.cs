@@ -45,6 +45,7 @@
             this.btnAjout = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
             this.btnModif = new System.Windows.Forms.Button();
+            this.btxgen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbxRef
@@ -183,11 +184,22 @@
             this.btnModif.TabIndex = 15;
             this.btnModif.UseVisualStyleBackColor = true;
             // 
+            // btxgen
+            // 
+            this.btxgen.Location = new System.Drawing.Point(295, 177);
+            this.btxgen.Name = "btxgen";
+            this.btxgen.Size = new System.Drawing.Size(75, 23);
+            this.btxgen.TabIndex = 16;
+            this.btxgen.Text = "Générer";
+            this.btxgen.UseVisualStyleBackColor = true;
+            this.btxgen.Click += new System.EventHandler(this.btxgen_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 220);
+            this.Controls.Add(this.btxgen);
             this.Controls.Add(this.btnModif);
             this.Controls.Add(this.btnSupprimer);
             this.Controls.Add(this.btnAjout);
@@ -229,6 +241,7 @@
         private System.Windows.Forms.Button btnAjout;
         private System.Windows.Forms.Button btnSupprimer;
         private System.Windows.Forms.Button btnModif;
+        private System.Windows.Forms.Button btxgen;
     }
 }
 
