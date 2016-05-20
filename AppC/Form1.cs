@@ -17,8 +17,11 @@ namespace AppC
         public Form1()
         {
             InitializeComponent();
-
+           
         }
+
+        
+
         /// <summary>
         /// L'évenèment faisant appel à la fonction ReadData en lui passant en paramètre les infos sur la connexion. 
         /// </summary>
@@ -26,12 +29,12 @@ namespace AppC
         /// <param name="e"></param>
         public void btxgen_Click(object sender, EventArgs e)
         {
-            string Connexion = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\mboyoiv\Desktop\AtelierBouchard\Application\AppC\Plumier_data.accdb;Persist Security Info=False;";
+            string Connexion = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..\..\Plumier_data.accdb;Persist Security Info=False;";
             string maCommande = "SELECT art_nom, art_reference, art_prix, art_qte_stock, art_seuil_critique FROM T_article";
-
+           
             ReadData(Connexion, maCommande);
-
         }
+
         /// <summary>
         /// Cette fonction reçois en paramètre la connexion et la requête sql
         /// </summary>
@@ -39,10 +42,10 @@ namespace AppC
         /// <param name="query"></param>
         public void ReadData(string maConnexion, string query)
         {
-
             using (OleDbConnection connexion = new OleDbConnection(maConnexion))
             {
-                OleDbCommand command = new OleDbCommand(query, connexion);
+              
+                OleDbCommand command = new OleDbCommand(query,connexion);
                 connexion.Open();
 
                 OleDbDataReader reader = command.ExecuteReader();
@@ -55,10 +58,70 @@ namespace AppC
                     tbxStock.Text = reader["art_qte_stock"].ToString();
                     tbxSeuil.Text = reader["art_seuil_critique"].ToString();
                 }
+
                 reader.Close();
+                connexion.Close();
             }
         }
 
-     
+        public void btnAjout_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // on recupère la saisie de l'utilisateur
+                string strNomArt = tbxArticle.Text;
+                string strRef = tbxReference.Text;
+                double dblPrix = Convert.ToDouble(tbxPrix.Text);
+                double dblStock = Convert.ToDouble(tbxStock.Text);
+                double dblSeuil = Convert.ToDouble(tbxSeuil.Text);
+
+                // On test si les champs de saisies ne sont pas null
+                if (strNomArt != null && strRef != null)
+                {
+                    // Si le test est valide on vide le textbox
+                    tbxArticle.Text = "";
+                    tbxReference.Text = "";
+                    tbxPrix.Text = "";
+                    tbxStock.Text = "";
+                    tbxSeuil.Text = "";
+
+                    System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection();
+                    conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..\..\Plumier_data.accdb;Persist Security Info=False;";
+
+                    try
+                    {
+                        conn.Open();
+                        string strReq = "INSERT INTO T_article(art_nom,art_reference,art_prix,art_qte_stock,art_seuil_critique)VALUES('" + strNomArt + "','" + strRef + "'," + dblPrix + "," + dblStock + "," + dblSeuil + ")";
+                        //string strReq = "INSERT INTO T_article(art_nom,art_reference,art_prix,art_qte_stock,art_seuil_critique)VALUES('aaaa', '99999', 30,10,5)";
+
+                        OleDbCommand cmd = new OleDbCommand(strReq, conn);
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Enregistré !!!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erreur lors de l'enregistrement " + ex.Message);
+                    }
+                    finally {
+
+                        conn.Close();       
+                    }
+                }
+            }
+            catch (Exception)
+            {    
+                throw;
+            }
+        }
+
+        private void btnvider_Click(object sender, EventArgs e)
+        {
+            tbxArticle.Text = "";
+            tbxReference.Text = "";
+            tbxPrix.Text = "";
+            tbxStock.Text = "";
+            tbxSeuil.Text = "";
+        }
     }
 }
