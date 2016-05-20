@@ -19,29 +19,46 @@ namespace AppC
             InitializeComponent();
 
         }
-
-        private void btxgen_Click(object sender, EventArgs e)
+        /// <summary>
+        /// L'évenèment faisant appel à la fonction ReadData en lui passant en paramètre les infos sur la connexion. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void btxgen_Click(object sender, EventArgs e)
         {
-            string ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\mboyoiv\Desktop\AtelierBouchard\Application\AppC\Plumier_data.accdb;Persist Security Info=False;";
-            OleDbConnection maConnexion = new OleDbConnection(ConnectionString);
-            maConnexion.Open();
+            string Connexion = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\mboyoiv\Desktop\AtelierBouchard\Application\AppC\Plumier_data.accdb;Persist Security Info=False;";
+            string maCommande = "SELECT art_nom, art_reference, art_prix, art_qte_stock, art_seuil_critique FROM T_article";
 
-            System.Data.OleDb.OleDbCommand maCommande = new System.Data.OleDb.OleDbCommand();
-            maCommande.CommandText = "SELECT art_nom, art_reference, art_prix, art_qte_stock, art_seuil_critique FROM T_article";
-            OleDbDataReader monReader = maCommande.ExecuteReader();
+            ReadData(Connexion, maCommande);
 
-            // test si il y a du contenu dans les table plus affichage dans les textbox
-            while (monReader.Read())
-            {
-                tbxArticle.Text = monReader["art_nom"].ToString();
-                tbxReference.Text = monReader["art_reference"].ToString();
-                tbxPrix.Text = monReader["art_prix"].ToString();
-                tbxStock.Text = monReader["art_qte_stock"].ToString();
-                tbxSeuil.Text = monReader["art_seuil_critique"].ToString();
-            }
-
-            monReader.Close();
-            maConnexion.Close();
         }
+        /// <summary>
+        /// Cette fonction reçois en paramètre la connexion et la requête sql
+        /// </summary>
+        /// <param name="maConnexion"></param>
+        /// <param name="query"></param>
+        public void ReadData(string maConnexion, string query)
+        {
+
+            using (OleDbConnection connexion = new OleDbConnection(maConnexion))
+            {
+                OleDbCommand command = new OleDbCommand(query, connexion);
+                connexion.Open();
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    tbxArticle.Text = reader["art_nom"].ToString();
+                    tbxReference.Text = reader["art_reference"].ToString();
+                    tbxPrix.Text = reader["art_prix"] + " CHF".ToString();
+                    tbxStock.Text = reader["art_qte_stock"].ToString();
+                    tbxSeuil.Text = reader["art_seuil_critique"].ToString();
+                }
+                reader.Close();
+            }
+        }
+
+     
     }
 }
