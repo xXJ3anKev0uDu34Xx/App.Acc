@@ -20,8 +20,6 @@ namespace AppC
            
         }
 
-        
-
         /// <summary>
         /// L'évenèment faisant appel à la fonction ReadData en lui passant en paramètre les infos sur la connexion. 
         /// </summary>
@@ -109,9 +107,9 @@ namespace AppC
                     }
                 }
             }
-            catch (Exception)
-            {    
-                throw;
+            catch (Exception em)
+            {
+                MessageBox.Show(em.Message);
             }
         }
 
