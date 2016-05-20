@@ -90,8 +90,7 @@ namespace AppC
                     {
                         conn.Open();
                         string strReq = "INSERT INTO T_article(art_nom,art_reference,art_prix,art_qte_stock,art_seuil_critique)VALUES('" + strNomArt + "','" + strRef + "'," + dblPrix + "," + dblStock + "," + dblSeuil + ")";
-                        //string strReq = "INSERT INTO T_article(art_nom,art_reference,art_prix,art_qte_stock,art_seuil_critique)VALUES('aaaa', '99999', 30,10,5)";
-
+                        
                         OleDbCommand cmd = new OleDbCommand(strReq, conn);
                         cmd.ExecuteNonQuery();
 
