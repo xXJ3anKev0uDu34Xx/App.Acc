@@ -175,6 +175,7 @@
             this.btnSupprimer.Size = new System.Drawing.Size(46, 46);
             this.btnSupprimer.TabIndex = 14;
             this.btnSupprimer.UseVisualStyleBackColor = true;
+            this.btnSupprimer.Click += new System.EventHandler(this.btnSupprimer_Click);
             // 
             // btnModif
             // 
@@ -185,6 +186,7 @@
             this.btnModif.Size = new System.Drawing.Size(46, 46);
             this.btnModif.TabIndex = 15;
             this.btnModif.UseVisualStyleBackColor = true;
+            this.btnModif.Click += new System.EventHandler(this.btnModif_Click);
             // 
             // btxgen
             // 
