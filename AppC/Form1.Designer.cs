@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lbxRef = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@
             this.btnModif = new System.Windows.Forms.Button();
             this.btxgen = new System.Windows.Forms.Button();
             this.btnvider = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbxRef
@@ -56,6 +58,7 @@
             this.lbxRef.Name = "lbxRef";
             this.lbxRef.Size = new System.Drawing.Size(120, 199);
             this.lbxRef.TabIndex = 0;
+            this.lbxRef.SelectedValueChanged += new System.EventHandler(this.lbxRef_SelectedValueChanged);
             // 
             // label1
             // 
@@ -110,6 +113,7 @@
             this.btnSuivant.Size = new System.Drawing.Size(47, 46);
             this.btnSuivant.TabIndex = 6;
             this.btnSuivant.UseVisualStyleBackColor = true;
+            this.btnSuivant.Click += new System.EventHandler(this.btnSuivant_Click);
             // 
             // btnPrecedent
             // 
@@ -119,6 +123,7 @@
             this.btnPrecedent.Size = new System.Drawing.Size(47, 46);
             this.btnPrecedent.TabIndex = 7;
             this.btnPrecedent.UseVisualStyleBackColor = true;
+            this.btnPrecedent.Click += new System.EventHandler(this.btnSuivant_Click);
             // 
             // tbxArticle
             // 
@@ -208,6 +213,10 @@
             this.btnvider.UseVisualStyleBackColor = true;
             this.btnvider.Click += new System.EventHandler(this.btnvider_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,6 +267,7 @@
         private System.Windows.Forms.Button btnModif;
         private System.Windows.Forms.Button btxgen;
         private System.Windows.Forms.Button btnvider;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

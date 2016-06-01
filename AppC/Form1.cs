@@ -23,6 +23,7 @@ namespace AppC
             InitializeComponent();
             conn.ConnectionString = Connexion;
             conn.Open();
+            QuerryUpdate();
         }
 
         /// L'évenèment faisant appel à la fonction ReadData en lui passant en paramètre les infos sur la connexion. 
@@ -49,13 +50,32 @@ namespace AppC
 
             while (reader.Read())
             {
+               
+                
                 tbxArticle.Text = reader["art_nom"].ToString();
                 tbxReference.Text = reader["art_reference"].ToString();
                 tbxPrix.Text = reader["art_prix"].ToString();
                 tbxStock.Text = reader["art_qte_stock"].ToString();
                 tbxSeuil.Text = reader["art_seuil_critique"].ToString();
+                
+                
+                    lbxRef.Items.Add(reader["art_reference"].ToString());
+                
+                
+                
             }
             reader.Close();
+           
+            
+            
+        }
+        public void QuerryUpdate()
+        {
+            lbxRef.Items.Clear();
+            //string maCommande = "SELECT count (*)  T_article";
+            string maCommande = "SELECT * FROM T_article";
+
+            ReadData(Connexion, maCommande);
         }
 
         public void btnAjout_Click(object sender, EventArgs e)
@@ -80,6 +100,7 @@ namespace AppC
                         string strRq = "INSERT INTO T_article(art_nom,art_reference,art_prix,art_qte_stock,art_seuil_critique)VALUES('" + strNomArt + "','" + strRef + "'," + dblPrix + "," + dblStock + "," + dblSeuil + ")";
                         OleDbCommand cmd = new OleDbCommand(strRq, conn);
                         cmd.ExecuteNonQuery();
+                        QuerryUpdate();
                         MessageBox.Show("Enregistré");
                     }
                     catch (Exception ex)
@@ -111,6 +132,7 @@ namespace AppC
                 cmd.ExecuteNonQuery();
                 vider();
                 MessageBox.Show("supprimé");
+                QuerryUpdate();
             }
             catch (Exception ex)
             {
@@ -132,6 +154,7 @@ namespace AppC
             {
                 MessageBox.Show(ex.Message);
             }
+            QuerryUpdate();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -152,6 +175,62 @@ namespace AppC
                 default:
                     break;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbxRef.Items.Clear();
+            //string maCommande = "SELECT count (*)  T_article";
+            string maCommande = "SELECT * FROM T_article";
+            ReadData(Connexion, maCommande);
+            
+        }
+
+        private void btnSuivant_Click(object sender, EventArgs e)
+        {
+            if ((Control)sender == btnSuivant)
+            {
+                try
+                {
+                    lbxRef.SelectedIndex = lbxRef.SelectedIndex + 1;
+                }
+                catch
+                {
+                    lbxRef.SelectedIndex = 0;
+                }
+            }
+            if ((Control)sender == btnPrecedent)
+            {
+                try
+                {
+                    lbxRef.SelectedIndex = lbxRef.SelectedIndex - 1;
+                }
+                catch
+                {
+                    lbxRef.SelectedIndex = 0;
+                }
+            }
+
+        }
+
+        private void lbxRef_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string selection=lbxRef.SelectedItem.ToString();
+
+
+            string maCommande = "SELECT art_nom, art_reference, art_prix, art_qte_stock, art_seuil_critique FROM T_article WHERE art_reference="+selection;
+           // ReadData(Connexion, maCommande);
+
+            OleDbCommand cmd = new OleDbCommand(maCommande, conn);
+            OleDbDataReader reader = cmd.ExecuteReader();
+            
+            
+            
+                tbxArticle.Text = reader["art_nom"].ToString();
+            
+
+            
+     
         }
     }
 }

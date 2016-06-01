@@ -20,3 +20,12 @@ C:\Users\mboyoiv\Desktop\AtelierBouchard\Application\AppC\bin\Debug\AppC.exe.con
 C:\Users\mboyoiv\Desktop\AtelierBouchard\Application\AppC\bin\Debug\AppC.exe
 C:\Users\mboyoiv\Desktop\AtelierBouchard\Application\AppC\bin\Debug\AppC.pdb
 C:\Users\mboyoiv\Desktop\AtelierBouchard\Application\AppC\obj\Debug\AppC.csprojResolveAssemblyReference.cache
+C:\Users\lamouchin\Desktop\App.Acc\AppC\bin\Debug\AppC.exe.config
+C:\Users\lamouchin\Desktop\App.Acc\AppC\obj\Debug\AppC.exe
+C:\Users\lamouchin\Desktop\App.Acc\AppC\obj\Debug\AppC.pdb
+C:\Users\lamouchin\Desktop\App.Acc\AppC\bin\Debug\AppC.exe
+C:\Users\lamouchin\Desktop\App.Acc\AppC\bin\Debug\AppC.pdb
+C:\Users\lamouchin\Desktop\App.Acc\AppC\obj\Debug\AppC.csprojResolveAssemblyReference.cache
+C:\Users\lamouchin\Desktop\App.Acc\AppC\obj\Debug\AppC.Form1.resources
+C:\Users\lamouchin\Desktop\App.Acc\AppC\obj\Debug\AppC.Properties.Resources.resources
+C:\Users\lamouchin\Desktop\App.Acc\AppC\obj\Debug\AppC.csproj.GenerateResource.Cache
