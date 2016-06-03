@@ -23,15 +23,13 @@ namespace AppC
             InitializeComponent();
             conn.ConnectionString = Connexion;
             conn.Open();
+            QuerryUpdate();
         }
 
-        /// L'évenèment faisant appel à la fonction ReadData en lui passant en paramètre les infos sur la connexion. 
-        public void btxgen_Click(object sender, EventArgs e)
-        {
-            string maCommande = "SELECT art_nom, art_reference, art_prix, art_qte_stock, art_seuil_critique FROM T_article";
-            ReadData(Connexion, maCommande);
-        }
-
+        
+        /// <summary>
+        /// Permet de vider le tableau affichant les données
+        /// </summary>
         public void vider()
         {
             tbxArticle.Clear();
@@ -49,13 +47,35 @@ namespace AppC
 
             while (reader.Read())
             {
+               
+                
                 tbxArticle.Text = reader["art_nom"].ToString();
                 tbxReference.Text = reader["art_reference"].ToString();
                 tbxPrix.Text = reader["art_prix"].ToString();
                 tbxStock.Text = reader["art_qte_stock"].ToString();
                 tbxSeuil.Text = reader["art_seuil_critique"].ToString();
+                
+                //permet d'ajouter la reference courrante à la liste
+                lbxRef.Items.Add(reader["art_reference"].ToString());
+                
+                
+                
             }
             reader.Close();
+           
+            
+            
+        }
+        /// <summary>
+        /// Permet de remettre à jour l'affichage des données
+        /// </summary>
+        public void QuerryUpdate()
+        {
+            lbxRef.Items.Clear();
+            //string maCommande = "SELECT count (*)  T_article";
+            string maCommande = "SELECT * FROM T_article";
+
+            ReadData(Connexion, maCommande);
         }
 
         public void btnAjout_Click(object sender, EventArgs e)
@@ -80,6 +100,7 @@ namespace AppC
                         string strRq = "INSERT INTO T_article(art_nom,art_reference,art_prix,art_qte_stock,art_seuil_critique)VALUES('" + strNomArt + "','" + strRef + "'," + dblPrix + "," + dblStock + "," + dblSeuil + ")";
                         OleDbCommand cmd = new OleDbCommand(strRq, conn);
                         cmd.ExecuteNonQuery();
+                        QuerryUpdate();
                         MessageBox.Show("Enregistré");
                     }
                     catch (Exception ex)
@@ -111,6 +132,7 @@ namespace AppC
                 cmd.ExecuteNonQuery();
                 vider();
                 MessageBox.Show("supprimé");
+                QuerryUpdate();
             }
             catch (Exception ex)
             {
@@ -132,6 +154,7 @@ namespace AppC
             {
                 MessageBox.Show(ex.Message);
             }
+            QuerryUpdate();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -152,6 +175,96 @@ namespace AppC
                 default:
                     break;
             }
+        }
+
+       
+        /// <summary>
+        /// Permet de cibler le prochain ou l'élément précédent dans la liste
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSuivant_Click(object sender, EventArgs e)
+        {
+            /// Permet de cibler le prochain élément dans la liste
+            if ((Control)sender == btnSuivant)
+            {
+                try
+                {
+                    lbxRef.SelectedIndex = lbxRef.SelectedIndex + 1;
+                }
+                catch
+                {
+                    lbxRef.SelectedIndex = 0;
+                }
+            }
+            /// Permet de cibler l'élément précédent dans la liste
+            if ((Control)sender == btnPrecedent)
+            {
+                try
+                {
+                    lbxRef.SelectedIndex = lbxRef.SelectedIndex - 1;
+                }
+                catch
+                {
+                    lbxRef.SelectedIndex = 0;
+                }
+            }
+
+        }
+        /// <summary>
+        /// a chaque changement de valeur de réference ciblée de la liste nous allons afficher les données associées à celle-ci
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lbxRef_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string selection = lbxRef.SelectedItem.ToString();
+            string maCommande = "SELECT * FROM T_article WHERE art_reference="+"'"+selection+"'";
+            OleDbCommand cmd = new OleDbCommand(maCommande, conn);
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                tbxArticle.Text = reader["art_nom"].ToString();
+                tbxReference.Text = reader["art_reference"].ToString();
+                tbxPrix.Text = reader["art_prix"].ToString();
+                tbxStock.Text = reader["art_qte_stock"].ToString();
+                tbxSeuil.Text = reader["art_seuil_critique"].ToString();
+            }           
+        }
+        /// <summary>
+        /// Permet de cibler le prochain ou l'élément précédent dans la liste
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            {
+                /// Permet de cibler le prochain élément dans la liste
+                if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Right)
+                {
+                    try
+                    {
+                        lbxRef.SelectedIndex += 1;
+                    }
+                    catch
+                    {
+                        lbxRef.SelectedIndex = 0;
+                    }
+                }
+                /// Permet de cibler l'élément précédent dans la liste
+                if (e.KeyCode == e.KeyCode || e.KeyCode == Keys.Left)
+                {
+                    try
+                    {
+                        lbxRef.SelectedIndex += lbxRef.SelectedIndex - 1;
+                    }
+                    catch
+                    {
+                        lbxRef.SelectedIndex = 0;
+                    }
+                }
+            }
+
         }
     }
 }

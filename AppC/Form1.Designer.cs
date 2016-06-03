@@ -45,7 +45,6 @@
             this.btnAjout = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
             this.btnModif = new System.Windows.Forms.Button();
-            this.btxgen = new System.Windows.Forms.Button();
             this.btnvider = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -56,6 +55,7 @@
             this.lbxRef.Name = "lbxRef";
             this.lbxRef.Size = new System.Drawing.Size(120, 199);
             this.lbxRef.TabIndex = 0;
+            this.lbxRef.SelectedValueChanged += new System.EventHandler(this.lbxRef_SelectedValueChanged);
             // 
             // label1
             // 
@@ -110,6 +110,7 @@
             this.btnSuivant.Size = new System.Drawing.Size(47, 46);
             this.btnSuivant.TabIndex = 6;
             this.btnSuivant.UseVisualStyleBackColor = true;
+            this.btnSuivant.Click += new System.EventHandler(this.btnSuivant_Click);
             // 
             // btnPrecedent
             // 
@@ -119,6 +120,7 @@
             this.btnPrecedent.Size = new System.Drawing.Size(47, 46);
             this.btnPrecedent.TabIndex = 7;
             this.btnPrecedent.UseVisualStyleBackColor = true;
+            this.btnPrecedent.Click += new System.EventHandler(this.btnSuivant_Click);
             // 
             // tbxArticle
             // 
@@ -188,16 +190,6 @@
             this.btnModif.UseVisualStyleBackColor = true;
             this.btnModif.Click += new System.EventHandler(this.btnModif_Click);
             // 
-            // btxgen
-            // 
-            this.btxgen.Location = new System.Drawing.Point(302, 159);
-            this.btxgen.Name = "btxgen";
-            this.btxgen.Size = new System.Drawing.Size(75, 23);
-            this.btxgen.TabIndex = 16;
-            this.btxgen.Text = "Générer";
-            this.btxgen.UseVisualStyleBackColor = true;
-            this.btxgen.Click += new System.EventHandler(this.btxgen_Click);
-            // 
             // btnvider
             // 
             this.btnvider.Location = new System.Drawing.Point(302, 188);
@@ -214,7 +206,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 220);
             this.Controls.Add(this.btnvider);
-            this.Controls.Add(this.btxgen);
             this.Controls.Add(this.btnModif);
             this.Controls.Add(this.btnSupprimer);
             this.Controls.Add(this.btnAjout);
@@ -232,7 +223,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbxRef);
             this.Name = "Form1";
-            this.Text = "Gestion des articles";
+            this.Text = "9";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,7 +248,6 @@
         private System.Windows.Forms.Button btnAjout;
         private System.Windows.Forms.Button btnSupprimer;
         private System.Windows.Forms.Button btnModif;
-        private System.Windows.Forms.Button btxgen;
         private System.Windows.Forms.Button btnvider;
     }
 }
