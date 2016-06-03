@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lbxRef = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,9 +45,7 @@
             this.btnAjout = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
             this.btnModif = new System.Windows.Forms.Button();
-            this.btxgen = new System.Windows.Forms.Button();
             this.btnvider = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbxRef
@@ -193,16 +190,6 @@
             this.btnModif.UseVisualStyleBackColor = true;
             this.btnModif.Click += new System.EventHandler(this.btnModif_Click);
             // 
-            // btxgen
-            // 
-            this.btxgen.Location = new System.Drawing.Point(302, 159);
-            this.btxgen.Name = "btxgen";
-            this.btxgen.Size = new System.Drawing.Size(75, 23);
-            this.btxgen.TabIndex = 16;
-            this.btxgen.Text = "Générer";
-            this.btxgen.UseVisualStyleBackColor = true;
-            this.btxgen.Click += new System.EventHandler(this.btxgen_Click);
-            // 
             // btnvider
             // 
             this.btnvider.Location = new System.Drawing.Point(302, 188);
@@ -213,17 +200,12 @@
             this.btnvider.UseVisualStyleBackColor = true;
             this.btnvider.Click += new System.EventHandler(this.btnvider_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 220);
             this.Controls.Add(this.btnvider);
-            this.Controls.Add(this.btxgen);
             this.Controls.Add(this.btnModif);
             this.Controls.Add(this.btnSupprimer);
             this.Controls.Add(this.btnAjout);
@@ -242,6 +224,7 @@
             this.Controls.Add(this.lbxRef);
             this.Name = "Form1";
             this.Text = "9";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,9 +248,7 @@
         private System.Windows.Forms.Button btnAjout;
         private System.Windows.Forms.Button btnSupprimer;
         private System.Windows.Forms.Button btnModif;
-        private System.Windows.Forms.Button btxgen;
         private System.Windows.Forms.Button btnvider;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -26,13 +26,10 @@ namespace AppC
             QuerryUpdate();
         }
 
-        /// L'évenèment faisant appel à la fonction ReadData en lui passant en paramètre les infos sur la connexion. 
-        public void btxgen_Click(object sender, EventArgs e)
-        {
-            string maCommande = "SELECT art_nom, art_reference, art_prix, art_qte_stock, art_seuil_critique FROM T_article";
-            ReadData(Connexion, maCommande);
-        }
-
+        
+        /// <summary>
+        /// Permet de vider le tableau affichant les données
+        /// </summary>
         public void vider()
         {
             tbxArticle.Clear();
@@ -58,8 +55,8 @@ namespace AppC
                 tbxStock.Text = reader["art_qte_stock"].ToString();
                 tbxSeuil.Text = reader["art_seuil_critique"].ToString();
                 
-                
-                    lbxRef.Items.Add(reader["art_reference"].ToString());
+                //permet d'ajouter la reference courrante à la liste
+                lbxRef.Items.Add(reader["art_reference"].ToString());
                 
                 
                 
@@ -69,6 +66,9 @@ namespace AppC
             
             
         }
+        /// <summary>
+        /// Permet de remettre à jour l'affichage des données
+        /// </summary>
         public void QuerryUpdate()
         {
             lbxRef.Items.Clear();
@@ -177,17 +177,15 @@ namespace AppC
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lbxRef.Items.Clear();
-            //string maCommande = "SELECT count (*)  T_article";
-            string maCommande = "SELECT * FROM T_article";
-            ReadData(Connexion, maCommande);
-            
-        }
-
+       
+        /// <summary>
+        /// Permet de cibler le prochain ou l'élément précédent dans la liste
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSuivant_Click(object sender, EventArgs e)
         {
+            /// Permet de cibler le prochain élément dans la liste
             if ((Control)sender == btnSuivant)
             {
                 try
@@ -199,6 +197,7 @@ namespace AppC
                     lbxRef.SelectedIndex = 0;
                 }
             }
+            /// Permet de cibler l'élément précédent dans la liste
             if ((Control)sender == btnPrecedent)
             {
                 try
@@ -212,25 +211,60 @@ namespace AppC
             }
 
         }
-
+        /// <summary>
+        /// a chaque changement de valeur de réference ciblée de la liste nous allons afficher les données associées à celle-ci
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbxRef_SelectedValueChanged(object sender, EventArgs e)
         {
-            string selection=lbxRef.SelectedItem.ToString();
-
-
-            string maCommande = "SELECT art_nom, art_reference, art_prix, art_qte_stock, art_seuil_critique FROM T_article WHERE art_reference="+selection;
-           // ReadData(Connexion, maCommande);
-
+            string selection = lbxRef.SelectedItem.ToString();
+            string maCommande = "SELECT * FROM T_article WHERE art_reference="+"'"+selection+"'";
             OleDbCommand cmd = new OleDbCommand(maCommande, conn);
             OleDbDataReader reader = cmd.ExecuteReader();
-            
-            
-            
+            while (reader.Read())
+            {
                 tbxArticle.Text = reader["art_nom"].ToString();
-            
+                tbxReference.Text = reader["art_reference"].ToString();
+                tbxPrix.Text = reader["art_prix"].ToString();
+                tbxStock.Text = reader["art_qte_stock"].ToString();
+                tbxSeuil.Text = reader["art_seuil_critique"].ToString();
+            }           
+        }
+        /// <summary>
+        /// Permet de cibler le prochain ou l'élément précédent dans la liste
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            {
+                /// Permet de cibler le prochain élément dans la liste
+                if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Right)
+                {
+                    try
+                    {
+                        lbxRef.SelectedIndex += 1;
+                    }
+                    catch
+                    {
+                        lbxRef.SelectedIndex = 0;
+                    }
+                }
+                /// Permet de cibler l'élément précédent dans la liste
+                if (e.KeyCode == e.KeyCode || e.KeyCode == Keys.Left)
+                {
+                    try
+                    {
+                        lbxRef.SelectedIndex += lbxRef.SelectedIndex - 1;
+                    }
+                    catch
+                    {
+                        lbxRef.SelectedIndex = 0;
+                    }
+                }
+            }
 
-            
-     
         }
     }
 }
