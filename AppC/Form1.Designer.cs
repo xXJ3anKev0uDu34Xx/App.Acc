@@ -109,6 +109,7 @@
             this.btnSuivant.Size = new System.Drawing.Size(47, 46);
             this.btnSuivant.TabIndex = 6;
             this.btnSuivant.UseVisualStyleBackColor = true;
+            this.btnSuivant.Click += new System.EventHandler(this.btnSuivant_Click);
             // 
             // btnPrecedent
             // 
@@ -217,7 +218,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbxRef);
             this.Name = "Form1";
-            this.Text = "Gestion des articles";
+            this.Text = "9";
             this.ResumeLayout(false);
             this.PerformLayout();
 

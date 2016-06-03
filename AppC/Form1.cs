@@ -26,7 +26,7 @@ namespace AppC
         /// <param name="e"></param>
         public void btxgen_Click(object sender, EventArgs e)
         {
-            string Connexion = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\mboyoiv\Desktop\AtelierBouchard\Application\AppC\Plumier_data.accdb;Persist Security Info=False;";
+            string Connexion = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source= ..\..\Plumier_data.accdb;Persist Security Info=False;";
             string maCommande = "SELECT art_nom, art_reference, art_prix, art_qte_stock, art_seuil_critique FROM T_article";
 
             ReadData(Connexion, maCommande);
@@ -40,23 +40,29 @@ namespace AppC
         public void ReadData(string maConnexion, string query)
         {
 
-            using (OleDbConnection connexion = new OleDbConnection(maConnexion))
+            OleDbConnection connexion = new OleDbConnection(maConnexion);
+            connexion.Open();
+
+            OleDbCommand command = new OleDbCommand(query, connexion);
+            OleDbDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
             {
-                OleDbCommand command = new OleDbCommand(query, connexion);
-                connexion.Open();
+            //tbxArticle.Text = reader["SELECT art_reference from T_article"].ToString();
+                   
+                tbxReference.Text = reader["art_reference"].ToString();
+                tbxPrix.Text = reader["art_prix"] + " CHF".ToString();
+                tbxStock.Text = reader["art_qte_stock"].ToString();
+                tbxSeuil.Text = reader["art_seuil_critique"].ToString();
+                // SqlDataAdapter adapter = new SqlDataAdapter();
+            }   
+            reader.Close();
+            
+        }
 
-                OleDbDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    tbxArticle.Text = reader["art_nom"].ToString();
-                    tbxReference.Text = reader["art_reference"].ToString();
-                    tbxPrix.Text = reader["art_prix"] + " CHF".ToString();
-                    tbxStock.Text = reader["art_qte_stock"].ToString();
-                    tbxSeuil.Text = reader["art_seuil_critique"].ToString();
-                }
-                reader.Close();
-            }
+        private void btnSuivant_Click(object sender, EventArgs e)
+        {
+            
         }
 
      
