@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lbxRef = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,6 +47,8 @@
             this.btnSupprimer = new System.Windows.Forms.Button();
             this.btnModif = new System.Windows.Forms.Button();
             this.btxgen = new System.Windows.Forms.Button();
+            this.btnvider = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbxRef
@@ -55,6 +58,7 @@
             this.lbxRef.Name = "lbxRef";
             this.lbxRef.Size = new System.Drawing.Size(120, 199);
             this.lbxRef.TabIndex = 0;
+            this.lbxRef.SelectedValueChanged += new System.EventHandler(this.lbxRef_SelectedValueChanged);
             // 
             // label1
             // 
@@ -119,6 +123,7 @@
             this.btnPrecedent.Size = new System.Drawing.Size(47, 46);
             this.btnPrecedent.TabIndex = 7;
             this.btnPrecedent.UseVisualStyleBackColor = true;
+            this.btnPrecedent.Click += new System.EventHandler(this.btnSuivant_Click);
             // 
             // tbxArticle
             // 
@@ -164,6 +169,7 @@
             this.btnAjout.Size = new System.Drawing.Size(47, 46);
             this.btnAjout.TabIndex = 13;
             this.btnAjout.UseVisualStyleBackColor = true;
+            this.btnAjout.Click += new System.EventHandler(this.btnAjout_Click);
             // 
             // btnSupprimer
             // 
@@ -174,6 +180,7 @@
             this.btnSupprimer.Size = new System.Drawing.Size(46, 46);
             this.btnSupprimer.TabIndex = 14;
             this.btnSupprimer.UseVisualStyleBackColor = true;
+            this.btnSupprimer.Click += new System.EventHandler(this.btnSupprimer_Click);
             // 
             // btnModif
             // 
@@ -184,10 +191,11 @@
             this.btnModif.Size = new System.Drawing.Size(46, 46);
             this.btnModif.TabIndex = 15;
             this.btnModif.UseVisualStyleBackColor = true;
+            this.btnModif.Click += new System.EventHandler(this.btnModif_Click);
             // 
             // btxgen
             // 
-            this.btxgen.Location = new System.Drawing.Point(295, 177);
+            this.btxgen.Location = new System.Drawing.Point(302, 159);
             this.btxgen.Name = "btxgen";
             this.btxgen.Size = new System.Drawing.Size(75, 23);
             this.btxgen.TabIndex = 16;
@@ -195,11 +203,26 @@
             this.btxgen.UseVisualStyleBackColor = true;
             this.btxgen.Click += new System.EventHandler(this.btxgen_Click);
             // 
+            // btnvider
+            // 
+            this.btnvider.Location = new System.Drawing.Point(302, 188);
+            this.btnvider.Name = "btnvider";
+            this.btnvider.Size = new System.Drawing.Size(75, 23);
+            this.btnvider.TabIndex = 17;
+            this.btnvider.Text = "Vider";
+            this.btnvider.UseVisualStyleBackColor = true;
+            this.btnvider.Click += new System.EventHandler(this.btnvider_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 220);
+            this.Controls.Add(this.btnvider);
             this.Controls.Add(this.btxgen);
             this.Controls.Add(this.btnModif);
             this.Controls.Add(this.btnSupprimer);
@@ -243,6 +266,8 @@
         private System.Windows.Forms.Button btnSupprimer;
         private System.Windows.Forms.Button btnModif;
         private System.Windows.Forms.Button btxgen;
+        private System.Windows.Forms.Button btnvider;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
